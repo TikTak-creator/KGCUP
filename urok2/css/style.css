@@ -1,6 +1,10 @@
 /* Universal styles and font imports */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Poller+One&display=swap');
 
+:root {
+    font-size: 16px; /* Base font size for rem units */
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -29,35 +33,37 @@ ul {
     position: relative;
     width: 100%;
     min-height: 100vh;
-    /* Removed padding-top here as the fixed top-nav-bar handles it */
     z-index: 1; /* Ensure content is above background effects */
 }
 
 /* Background Ellipses (approximating positions and blur) */
-/* These are kept as absolute to recreate the background effect */
+/* These are kept as absolute to recreate the background effect,
+   but we'll scale them using vw/vh for better responsiveness if they are purely decorative */
 .main-container::before { /* Ellipse 143 */
     content: '';
     position: absolute;
-    width: 2643px; /* Original width */
-    height: 2892px; /* Original height */
-    left: -224px; /* Original left */
-    top: -952px; /* Original top */
+    width: 150vw; /* Scaled width */
+    height: 150vh; /* Scaled height */
+    left: -10vw; /* Scaled left */
+    top: -50vh; /* Scaled top */
     background: linear-gradient(180deg, #190518 0%, rgba(25, 5, 24, 0) 100%);
-    filter: blur(282.9px);
+    filter: blur(min(15vw, 282.9px)); /* Adjust blur relative to viewport or max value */
     z-index: -2; /* Behind content */
+    border-radius: 50%; /* Make it look like an ellipse */
 }
 
 .main-container::after { /* Ellipse 145 */
     content: '';
     position: absolute;
-    width: 369px; /* Original width */
-    height: 353px; /* Original height */
-    left: -114px; /* Original left */
-    top: -101px; /* Original top */
+    width: 30vw; /* Scaled width */
+    height: 30vh; /* Scaled height */
+    left: -5vw; /* Scaled left */
+    top: -5vh; /* Scaled top */
     background: #EA103C;
     opacity: 0.23;
-    filter: blur(282.9px);
+    filter: blur(min(10vw, 282.9px)); /* Adjust blur */
     z-index: -1; /* Behind content, above other ellipse */
+    border-radius: 50%; /* Make it look like an ellipse */
 }
 
 
@@ -67,66 +73,74 @@ ul {
     top: 0;
     left: 0;
     width: 100%;
-    height: 32px; /* Rectangle 205 */
+    height: 2rem; /* Adjusted to rem */
     background: #0E1015;
     display: flex;
     align-items: center;
-    padding: 0 100px; /* Adjusted padding to match content-wrapper alignment */
+    padding: 0 1rem; /* Smaller padding for mobile, adjusted below */
     z-index: 100; /* Ensure it's on top */
+    justify-content: space-between; /* Space out items */
 }
 
 .logo-section {
     display: flex;
     align-items: center;
-    margin-right: 20px; /* Space between logo and game nav */
+    margin-right: 1rem;
 }
 
-.logo-icon { /* Vector 17 */
-    width: 12px;
-    height: 15px;
-    background: url("Vector17.png");
+.logo-icon {
+    width: 0.75rem;
+    height: 0.9375rem;
+    background: url("Vector17.png") no-repeat center center / contain;
     display: inline-block;
-    margin-right: 4px;
+    margin-right: 0.25rem;
 }
 
-.logo-text { /* TRACKX */
+.logo-text {
     font-family: 'Poller One', cursive;
     font-weight: 400;
-    font-size: 12px;
-    line-height: 14px;
+    font-size: 0.75rem; /* Adjusted to rem */
+    line-height: 0.875rem; /* Adjusted to rem */
     color: #FFFFFF;
+}
+
+.game-nav {
+    flex-grow: 1; /* Allow it to take available space */
+    overflow-x: auto; /* Allow scrolling for many items */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 .game-nav ul {
     display: flex;
     align-items: center;
-    gap: 15px; /* Adjust gap as needed */
+    gap: 0.8rem; /* Adjusted gap to rem */
 }
 
 .nav-item-top {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    font-size: 13px;
-    line-height: 16px;
+    font-size: 0.8125rem; /* Adjusted to rem */
+    line-height: 1rem; /* Adjusted to rem */
     letter-spacing: -0.05em;
     color: #484B51;
     white-space: nowrap; /* Prevent wrapping */
 }
 
 .game-nav .divider {
-    width: 2px;
-    height: 18px; /* Adjusted from 32px for better visual */
+    width: 0.125rem; /* Adjusted to rem */
+    height: 1.125rem; /* Adjusted to rem */
     background: #191B20;
+    flex-shrink: 0; /* Prevent divider from shrinking */
 }
 
 /* Content Wrapper to apply padding/margins to the main body content */
 .content-wrapper {
-    max-width: 1366px; /* Based on Frame 16 width */
+    max-width: 1366px; /* Keeping max-width for large screens */
     margin: 0 auto; /* Center the content */
-    padding: 0 100px; /* Consistent padding */
-    position: relative; /* For absolute positioning of children */
-    padding-top: 60px; /* Space for the fixed top-nav-bar */
-    padding-bottom: 200px; /* Give space before the footer starts */
+    padding: 0 1rem; /* Smaller default padding */
+    position: relative;
+    padding-top: 4rem; /* Space for the fixed top-nav-bar and potential fixed header */
+    padding-bottom: 5rem; /* Give space before the footer starts */
 }
 
 
@@ -134,28 +148,30 @@ ul {
 .header-main-section {
     position: relative;
     width: 100%;
-    height: 58px;
+    height: auto; /* Allow height to adjust */
     background: #0E1015;
     display: flex;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
     align-items: center;
     justify-content: space-between;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin-bottom: 20px;
-    /* Removed fixed top/left and relative left properties for better flow */
+    margin-bottom: 1.25rem; /* Adjusted to rem */
+    padding: 0.5rem 0; /* Add some vertical padding */
 }
 
 .search-bar {
     position: relative;
-    width: 827px;
-    height: 28px;
+    width: 100%; /* Full width on smaller screens */
+    max-width: 827px; /* Max width for larger screens */
+    height: 1.75rem; /* Adjusted to rem */
     background: #1B1D23;
     border: 1px solid rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(2px);
-    border-radius: 4px;
+    border-radius: 0.25rem; /* Adjusted to rem */
     display: flex;
     align-items: center;
-    padding: 0 10px;
-    /* Removed absolute/relative left here */
+    padding: 0 0.625rem; /* Adjusted to rem */
+    flex-grow: 1; /* Allow it to grow */
 }
 
 .search-bar input {
@@ -163,94 +179,94 @@ ul {
     border: none;
     color: #797C83;
     font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    line-height: 15px;
-    margin-left: 8px;
+    font-size: 0.75rem; /* Adjusted to rem */
+    line-height: 0.9375rem; /* Adjusted to rem */
+    margin-left: 0.5rem; /* Adjusted to rem */
     outline: none;
-    width: calc(100% - 30px);
+    width: calc(100% - 2rem); /* Adjust width to account for icon */
 }
 
 .search-icon {
-    width: 12px;
-    height: 12px;
+    width: 0.75rem; /* Adjusted to rem */
+    height: 0.75rem; /* Adjusted to rem */
     background: #797C83;
     display: inline-block;
     -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="%23797C83" d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.483 3.483a1 1 0 0 0 1.414-1.414l-3.483-3.483zM6.5 11C4.015 11 2 8.985 2 6.5S4.015 2 6.5 2 11 4.015 11 6.5 8.985 11 6.5 11z"/></svg>') no-repeat 50% 50%;
     mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="%23797C83" d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.483 3.483a1 1 0 0 0 1.414-1.414l-3.483-3.483zM6.5 11C4.015 11 2 8.985 2 6.5S4.015 2 6.5 2 11 4.015 11 6.5 8.985 11 6.5 11z"/></svg>') no-repeat 50% 50%;
     -webkit-mask-size: cover;
     mask-size: cover;
+    flex-shrink: 0;
 }
 
 
 .user-actions {
     display: flex;
     align-items: center;
-    gap: 20px;
-    /* Removed absolute/relative right here */
+    gap: 1.25rem; /* Adjusted to rem */
+    margin-top: 0; /* Reset */
 }
 
 .language-select, .sign-in {
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    font-size: 14px;
-    line-height: 21px;
+    font-size: 0.875rem; /* Adjusted to rem */
+    line-height: 1.3125rem; /* Adjusted to rem */
     color: #898D94;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 0.3125rem; /* Adjusted to rem */
 }
 
 .sign-in {
     background: linear-gradient(180deg, #272A30 0%, rgba(39, 42, 48, 0) 100%);
-    border-radius: 4px;
-    padding: 6px 15px;
+    border-radius: 0.25rem; /* Adjusted to rem */
+    padding: 0.375rem 0.9375rem; /* Adjusted to rem */
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    width: 97px;
-    height: 32px;
+    width: auto; /* Allow width to adjust */
+    height: 2rem; /* Adjusted to rem */
     justify-content: center;
+    white-space: nowrap; /* Prevent wrapping */
 }
 
 .profile-icon {
-    width: 15px;
-    height: 15px;
-    background: #999CA3;
-    display: inline-block;
+    width: 0.9375rem; /* Adjusted to rem */
+    height: 0.9375rem; /* Adjusted to rem */
     background: url('Vector.png') center/cover no-repeat;
+    display: inline-block;
 }
 
-.header-divider { /* Rectangle 234 */
+.header-divider {
     width: 100%;
-    height: 1px;
+    height: 0.0625rem; /* Adjusted to rem */
     background: #13151B;
     border: none;
-    margin-top: 5px; /* Adjust spacing as needed */
+    margin-top: 0.3125rem; /* Adjusted to rem */
 }
 
 /* Hero Section */
 .hero-section {
     position: relative;
-    padding: 40px 0;
+    padding: 2.5rem 0; /* Adjusted to rem */
     text-align: left;
-    margin-bottom: 50px;
+    margin-bottom: 3.125rem; /* Adjusted to rem */
 }
 
-.hero-title { /* Personalized Stats... */
-    max-width: 888px; /* Original width, changed to max-width for responsiveness */
+.hero-title {
+    max-width: 55.5rem; /* Keeping max-width, adjusted to rem */
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 28px;
-    line-height: 42px;
+    font-size: 1.75rem; /* Adjusted to rem */
+    line-height: 2.625rem; /* Adjusted to rem */
     color: #EFECF0;
-    margin-bottom: 30px;
-    margin-left: 0; /* Resetting any explicit left positioning */
+    margin-bottom: 1.875rem; /* Adjusted to rem */
 }
 
-.stats-group { /* Group 1 */
+.stats-group {
     display: flex;
     align-items: center;
-    gap: 30px;
-    margin-bottom: 40px;
-    margin-left: 0; /* Resetting any explicit left positioning */
+    gap: 1.875rem; /* Adjusted to rem */
+    margin-bottom: 2.5rem; /* Adjusted to rem */
+    flex-wrap: wrap; /* Allow stats to wrap */
 }
 
 .stat-item {
@@ -261,138 +277,139 @@ ul {
 .stat-number {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 18px;
-    line-height: 27px;
+    font-size: 1.125rem; /* Adjusted to rem */
+    line-height: 1.6875rem; /* Adjusted to rem */
     color: #EFECF0;
 }
 
 .stat-label {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 13px;
-    line-height: 20px;
+    font-size: 0.8125rem; /* Adjusted to rem */
+    line-height: 1.25rem; /* Adjusted to rem */
     color: #EFECF0;
 }
 
-.stat-divider { /* Rectangle 56, 59 */
-    width: 1px;
-    height: 48px;
+.stat-divider {
+    width: 0.0625rem; /* Adjusted to rem */
+    height: 3rem; /* Adjusted to rem */
     background: #272A30;
-    transform: matrix(1, 0, 0, 1, 0, 0); /* Resetting the matrix */
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .compliant-logos {
     display: flex;
-    gap: 10px;
-    margin-top: 5px;
+    gap: 0.625rem; /* Adjusted to rem */
+    margin-top: 0.3125rem; /* Adjusted to rem */
+    flex-wrap: wrap; /* Allow logos to wrap */
 }
 
 .riot-logo, .epic-logo, .ea-logo {
-    width: 26px;
-    height: 26px;
+    width: 1.625rem; /* Adjusted to rem */
+    height: 1.625rem; /* Adjusted to rem */
     background-color: #EFECF0; /* Placeholder color */
-    border-radius: 50%; /* Approximating circular logos */
+    border-radius: 50%;
     mix-blend-mode: hard-light;
     display: inline-block;
+    background-size: cover;
+    background-position: center;
 }
-/* You would replace background-color with actual background-image for logos */
-.riot-logo { background: url('riot-games-logo2.png') center/cover no-repeat; }
-.epic-logo { background: url('epic_logo_black2.png') center/cover no-repeat; }
-.ea-logo { background: url('images(1)2.png') center/cover no-repeat; } /* Assuming you have an EA logo image */
+.riot-logo { background-image: url('riot-games-logo2.png'); }
+.epic-logo { background-image: url('epic_logo_black2.png'); }
+.ea-logo { background-image: url('images(1)2.png'); }
 
-
-.download-button-hero { /* Rectangle 58 & Frame 17 */
-    position: absolute; /* Kept absolute to position it precisely */
-    right: 0; /* Position to the right within its containing block */
-    top: 205px; /* Adjust top relative to hero section (where Figma had it: 205px from top of frame) */
-    width: 175px;
-    height: 45px;
+.download-button-hero {
+    position: static; /* Changed to static for better flow on small screens */
+    margin-top: 1.5rem; /* Add margin when static */
+    width: 100%; /* Full width on small screens */
+    max-width: 10.9375rem; /* Max width for larger screens, adjusted to rem */
+    height: 2.8125rem; /* Adjusted to rem */
     background: #E9213D;
-    border-radius: 4px;
+    border-radius: 0.25rem; /* Adjusted to rem */
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 0.5rem; /* Adjusted to rem */
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 14px;
-    line-height: 21px;
+    font-size: 0.875rem; /* Adjusted to rem */
+    line-height: 1.3125rem; /* Adjusted to rem */
     color: #EFECF0;
 }
 
-.download-icon { /* RE1Mu3b 1 */
-    width: 21px;
-    height: 21px;
+.download-icon {
+    width: 1.3125rem; /* Adjusted to rem */
+    height: 1.3125rem; /* Adjusted to rem */
     background: url('RE1Mu3b.png') center/contain no-repeat;
     display: inline-block;
 }
 
 /* Games Section */
 .games-section {
-    padding-top: 20px;
+    padding-top: 1.25rem; /* Adjusted to rem */
 }
 
 .games-header {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 25px;
-    margin-left: 0; /* Resetting explicit left positioning */
+    gap: 0.9375rem; /* Adjusted to rem */
+    margin-bottom: 1.5625rem; /* Adjusted to rem */
+    flex-wrap: wrap; /* Allow items to wrap */
 }
 
-.all-games-title { /* All Games */
+.all-games-title {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 18px;
-    line-height: 27px;
+    font-size: 1.125rem; /* Adjusted to rem */
+    line-height: 1.6875rem; /* Adjusted to rem */
     color: #EFECF0;
+    white-space: nowrap;
 }
 
-.sort-by { /* Sort by popularity */
+.sort-by {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 12px;
-    line-height: 18px;
+    font-size: 0.75rem; /* Adjusted to rem */
+    line-height: 1.125rem; /* Adjusted to rem */
     color: #444444;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 0.3125rem; /* Adjusted to rem */
+    white-space: nowrap;
 }
 
-.sort-arrow { /* Vector 10 */
-    width: 8px;
-    height: 7px;
+.sort-arrow {
+    width: 0.5rem; /* Adjusted to rem */
+    height: 0.4375rem; /* Adjusted to rem */
     background: #FFFFFF;
     opacity: 0.5;
-    border-radius: 0.1px;
-    clip-path: polygon(0% 0%, 100% 0%, 50% 100%); /* Simple downward arrow */
+    border-radius: 0.00625rem; /* Adjusted to rem */
+    clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
     display: inline-block;
 }
 
 .game-cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); /* Game cards width 195px */
-    gap: 20px; /* Adjust spacing between cards */
-    /* Removed explicit left positioning, grid will handle centering/distribution */
-    /* width: calc(100% - 77px); /* Adjust width to fit */
-    justify-items: start; /* Align items to the start of their grid area */
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); /* Adjusted min-width for cards to rem */
+    gap: 1.25rem; /* Adjusted to rem */
+    justify-items: center; /* Center cards in their grid area */
 }
 
 .game-card {
     position: relative;
-    width: 195px;
-    height: 260px; /* Standard card height */
-    background: #D9D9D9; /* Placeholder background */
-    border-radius: 5px;
-    overflow: hidden; /* Ensure image fits */
+    width: 12.1875rem; /* Fixed width, adjusted to rem */
+    height: 16.25rem; /* Standard card height, adjusted to rem */
+    background: #D9D9D9;
+    border-radius: 0.3125rem; /* Adjusted to rem */
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    padding-bottom: 10px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Added for image 7, 8 */
+    padding-bottom: 0.625rem; /* Adjusted to rem */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .game-card .game-image {
@@ -402,97 +419,55 @@ ul {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: 0.25rem; /* Adjusted to rem */
     z-index: 1;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); /* Image 7, 8 */
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .game-card .game-title {
-    position: relative; /* Position above image */
+    position: relative;
     z-index: 2;
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
-    font-size: 14px;
-    line-height: 21px;
+    font-size: 0.875rem; /* Adjusted to rem */
+    line-height: 1.3125rem; /* Adjusted to rem */
     color: #EFECF0;
-    margin-top: 10px; /* Space from bottom of image */
+    margin-top: 0.625rem; /* Adjusted to rem */
     text-align: center;
 }
 
-/* Specific image adjustments based on Figma properties */
-.game-card:nth-child(1) .game-image { /* League of Legends */
-    /* width: 196px; height: 265px; left: 180px; top: 338px; */
-    /* These are absolute positions from Figma, adapting to relative */
-}
-.game-card:nth-child(3) .game-image { /* Valorant */
-    /* width: 195px; height: 260px; left: 591px; top: 338px; */
-    backdrop-filter: blur(2px);
-}
-.game-card:nth-child(4) .game-image { /* Team fight */
-    /* width: 198px; height: 266px; left: 796px; top: 335px; */
-    /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
-}
-.game-card:nth-child(5) .game-image { /* Apex Legend */
-    /* width: 193px; height: 267px; left: 1001px; top: 338px; */
-    /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
-}
-
+/* Specific image adjustments based on Figma properties (keep if specific images need unique styles) */
 /* Titles for games in the grid, overriding default if needed */
-.game-card:nth-child(2) .game-title { /* Counter Strike */
+.game-card:nth-child(2) .game-title,
+.game-card:nth-child(3) .game-title,
+.game-card:nth-child(4) .game-title,
+.game-card:nth-child(5) .game-title,
+.game-card:nth-child(7) .game-title,
+.game-card:nth-child(8) .game-title {
     font-weight: 500;
-    font-size: 13px;
-    line-height: 20px;
-    color: #FFFFFF;
-}
-.game-card:nth-child(3) .game-title { /* Valorant */
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 20px;
-    color: #FFFFFF;
-}
-.game-card:nth-child(4) .game-title { /* Team fight */
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 20px;
-    color: #FFFFFF;
-}
-.game-card:nth-child(5) .game-title { /* Apex Legend */
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 20px;
-    color: #FFFFFF;
-}
-.game-card:nth-child(7) .game-title { /* ESLAPE */
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 20px;
-    color: #FFFFFF;
-}
-.game-card:nth-child(8) .game-title { /* Destiny 2 */
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 20px;
+    font-size: 0.8125rem; /* Adjusted to rem */
+    line-height: 1.25rem; /* Adjusted to rem */
     color: #FFFFFF;
 }
 
-.coming-soon-tag { /* Rectangle 80 & COMING SOON */
+.coming-soon-tag {
     position: absolute;
-    bottom: 5px; /* Adjust as needed */
-    right: 5px; /* Adjust as needed */
-    width: 71px;
-    height: 18px;
+    bottom: 0.3125rem; /* Adjusted to rem */
+    right: 0.3125rem; /* Adjusted to rem */
+    width: 4.4375rem; /* Adjusted to rem */
+    height: 1.125rem; /* Adjusted to rem */
     background: #212227;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 0; /* No explicit border-radius */
+    border-radius: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    font-size: 8px;
-    line-height: 12px;
+    font-size: 0.5rem; /* Adjusted to rem */
+    line-height: 0.75rem; /* Adjusted to rem */
     color: #64676D;
-    z-index: 3; /* Above image and title */
+    z-index: 3;
 }
 
 
@@ -501,138 +476,147 @@ ul {
     position: relative;
     width: 100%;
     background: #14161B;
-    padding: 60px 100px 30px; /* Adjust padding as needed, especially top to create space */
+    padding: 3.75rem 1rem 1.875rem; /* Adjusted padding, smaller for mobile */
     display: flex;
-    flex-wrap: wrap; /* Allow items to wrap */
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: 100px; /* Add some space between game grid and footer */
+    margin-top: 6.25rem; /* Adjusted to rem */
 }
 
 .footer-left {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 250px; /* Adjust width as needed */
-    margin-right: 40px; /* Space from center columns */
+    width: 100%; /* Full width on small screens */
+    max-width: 15.625rem; /* Max width for larger screens, adjusted to rem */
+    margin-right: 0; /* Reset margin */
+    margin-bottom: 2rem; /* Add bottom margin for spacing on small screens */
 }
 
 .footer-logo {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem; /* Adjusted to rem */
 }
 
-.logo-icon-footer { /* Vector 11 */
-    width: 27px;
-    height: 33px;
-    background: url("Vector11.png");
+.logo-icon-footer {
+    width: 1.6875rem; /* Adjusted to rem */
+    height: 2.0625rem; /* Adjusted to rem */
+    background: url("Vector11.png") no-repeat center center / contain;
     display: inline-block;
-    margin-right: 5px;
+    margin-right: 0.3125rem; /* Adjusted to rem */
 }
 
-.logo-text-footer { /* AYUSHB */
+.logo-text-footer {
     font-family: 'Poller One', cursive;
     font-weight: 400;
-    font-size: 12px;
-    line-height: 14px;
+    font-size: 0.75rem; /* Adjusted to rem */
+    line-height: 0.875rem; /* Adjusted to rem */
     color: #FFFFFF;
 }
 
-.download-button-footer { /* Rectangle 69 & Download Now */
-    width: 218px;
-    height: 44px;
+.download-button-footer {
+    width: 100%;
+    max-width: 13.625rem; /* Max width for larger screens, adjusted to rem */
+    height: 2.75rem; /* Adjusted to rem */
     background: #D5224E;
-    border-radius: 4px;
+    border-radius: 0.25rem; /* Adjusted to rem */
     border: none;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 18px;
-    line-height: 27px;
+    font-size: 1.125rem; /* Adjusted to rem */
+    line-height: 1.6875rem; /* Adjusted to rem */
     color: #FFFFFF;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem; /* Adjusted to rem */
 }
 
-.fully-compliant-footer { /* Fully Complaint */
+.fully-compliant-footer {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 12px;
-    line-height: 18px;
+    font-size: 0.75rem; /* Adjusted to rem */
+    line-height: 1.125rem; /* Adjusted to rem */
     letter-spacing: -0.04em;
     color: #FFFFFF;
-    margin-bottom: 15px;
+    margin-bottom: 0.9375rem; /* Adjusted to rem */
 }
 
 .footer-game-logos {
     display: flex;
-    gap: 15px; /* Adjust gap */
+    gap: 0.9375rem; /* Adjusted to rem */
+    flex-wrap: wrap; /* Allow logos to wrap */
 }
 
 .riot-logo-footer, .epic-logo-footer, .ea-logo-footer {
-    width: 30px; /* Adjusted size */
-    height: 30px; /* Adjusted size */
+    width: 1.875rem; /* Adjusted to rem */
+    height: 1.875rem; /* Adjusted to rem */
     background-color: #EFECF0; /* Placeholder */
     mix-blend-mode: hard-light;
-    border-radius: 50%; /* Approximating circular */
+    border-radius: 50%;
     display: inline-block;
-    background-size: cover; /* Ensure logos fit */
-    background-position: center; /* Center logos */
+    background-size: cover;
+    background-position: center;
 }
-.riot-logo-footer { background-image: url('riot-games-logo2.png'); } /* riot-games-logo 1 */
-.epic-logo-footer { background-image: url('epic_logo_black2.png'); } /* epic_logo_black 1 */
-.ea-logo-footer { background-image: url('images(1)2.png'); border-radius: 2122px; } /* images (1) 1 - special border radius */
+.riot-logo-footer { background-image: url('riot-games-logo2.png'); }
+.epic-logo-footer { background-image: url('epic_logo_black2.png'); }
+.ea-logo-footer { background-image: url('images(1)2.png'); border-radius: 50%; } /* Changed specific border-radius to 50% for consistency */
 
 .footer-center {
     display: flex;
-    gap: 80px; /* Space between columns */
+    flex-wrap: wrap; /* Allow columns to wrap */
+    gap: 2.5rem; /* Adjusted gap to rem */
+    justify-content: space-between;
+    flex-grow: 1; /* Allow it to take available space */
 }
 
 .footer-column {
     display: flex;
     flex-direction: column;
+    flex-basis: calc(50% - 1.25rem); /* Two columns on medium screens, adjusted for gap */
+    min-width: 9.375rem; /* Minimum width for a column */
 }
 
-.footer-heading { /* COMPANY, SOCIALS, SUPPORTED GAMES */
+.footer-heading {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 12px;
-    line-height: 18px;
-    color: #7E8087; /* For COMPANY */
-    margin-bottom: 15px;
+    font-size: 0.75rem; /* Adjusted to rem */
+    line-height: 1.125rem; /* Adjusted to rem */
+    color: #7E8087;
+    margin-bottom: 0.9375rem; /* Adjusted to rem */
 }
 
 .footer-column ul li {
-    margin-bottom: 8px; /* Spacing for list items */
+    margin-bottom: 0.5rem; /* Adjusted to rem */
 }
 
 .footer-column ul li a {
     font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    line-height: 29px; /* Or 181% */
+    font-size: 1rem; /* Adjusted to rem */
+    line-height: 1.8125rem; /* Adjusted to rem */
     color: #FFFFFF;
     transition: color 0.3s ease;
 }
 
 /* Adjusting specific footer headings and links as per Figma */
-.footer-center .footer-column:nth-child(1) ul li a { /* COMPANY list items */
+.footer-center .footer-column:nth-child(1) ul li a {
     font-weight: 600;
 }
-.footer-center .footer-column:nth-child(2) .footer-heading { /* SOCIALS */
+.footer-center .footer-column:nth-child(2) .footer-heading {
     font-weight: 500;
     color: #787B81;
 }
-.footer-center .footer-column:nth-child(2) ul li a { /* SOCIALS list items */
+.footer-center .footer-column:nth-child(2) ul li a {
     font-weight: 500;
 }
-.footer-center .footer-column:nth-child(3) .footer-heading { /* SUPPORTED GAMES */
+.footer-center .footer-column:nth-child(3) .footer-heading {
     color: #787B81;
 }
-.footer-center .footer-column:nth-child(3) ul li a { /* SUPPORTED GAMES list items */
+.footer-center .footer-column:nth-child(3) ul li a {
     font-weight: 600;
 }
 
@@ -640,17 +624,446 @@ ul {
 .footer-bottom {
     width: 100%;
     display: flex;
+    flex-wrap: wrap; /* Allow items to wrap */
     justify-content: space-between;
     align-items: center;
-    margin-top: 50px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Optional: add a separator line */
-    padding-top: 20px;
+    margin-top: 3.125rem; /* Adjusted to rem */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.25rem; /* Adjusted to rem */
 }
 
 .copyright, .footer-link {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 12px;
-    line-height: 18px;
-    color: #7E8087; /* For 'Made with Lots of Love'
+    font-size: 0.75rem; /* Adjusted to rem */
+    line-height: 1.125rem; /* Adjusted to rem */
+    color: #7E8087;
+    text-align: center; /* Center text on small screens */
+    width: 100%; /* Full width for stacking */
+    margin-bottom: 0.5rem; /* Add spacing when stacked */
+}
+
+/* --- Media Queries for Responsiveness --- */
+
+/* Small devices (phones, 600px and down) */
+@media (max-width: 600px) {
+    .top-nav-bar {
+        padding: 0 0.5rem; /* Even smaller padding */
+        height: 1.8rem; /* Slightly smaller height */
+    }
+
+    .logo-text, .nav-item-top {
+        font-size: 0.7rem;
+    }
+
+    .game-nav ul {
+        gap: 0.5rem;
+    }
+
+    .content-wrapper {
+        padding: 0 0.5rem;
+        padding-top: 3.5rem; /* Adjust for smaller top nav */
+        padding-bottom: 3rem;
+    }
+
+    .header-main-section {
+        flex-direction: column; /* Stack search and user actions */
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 0.5rem;
+    }
+
+    .search-bar {
+        width: 100%;
+        max-width: none; /* Remove max-width constraint */
+    }
+
+    .user-actions {
+        width: 100%;
+        justify-content: space-between; /* Distribute language and sign-in */
+        gap: 1rem;
+    }
+
+    .sign-in {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    .hero-title {
+        font-size: 1.5rem;
+        line-height: 2.2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .stats-group {
+        flex-direction: column; /* Stack stats vertically */
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .stat-divider {
+        display: none; /* Hide dividers when stacked */
+    }
+
+    .download-button-hero {
+        width: 100%;
+        max-width: none;
+        margin-top: 1rem;
+    }
+
+    .games-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+
+    .game-cards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); /* Smaller cards on phones */
+    }
+
+    .game-card {
+        width: 90%; /* Adjust card width to fill more of the grid area */
+        height: 12rem;
+    }
+    .game-card .game-title {
+        font-size: 0.75rem;
+    }
+    .coming-soon-tag {
+        font-size: 0.4rem;
+        width: 3.5rem;
+        height: 0.9rem;
+    }
+
+    .main-footer {
+        padding: 2rem 0.5rem;
+        flex-direction: column; /* Stack footer sections */
+    }
+
+    .footer-left {
+        margin-bottom: 1.5rem;
+    }
+
+    .footer-center {
+        flex-direction: column; /* Stack footer columns */
+        gap: 1.5rem;
+        width: 100%;
+    }
+
+    .footer-column {
+        flex-basis: 100%; /* Each column takes full width */
+        min-width: auto;
+    }
+
+    /* ... (весь предыдущий CSS, включая первый медиа-запрос до .footer-bottom) ... */
+
+/* Small devices (phones, 600px and down) */
+@media (max-width: 600px) {
+    /* ... (все предыдущие стили для 600px) ... */
+
+    .footer-bottom {
+        flex-direction: column; /* Stack copyright and link */
+        margin-top: 2rem;
+    }
+
+    .copyright, .footer-link {
+        font-size: 0.65rem; /* Сделать шрифт еще меньше для маленьких экранов */
+        margin-bottom: 0.3rem; /* Уменьшить отступ между элементами */
+        padding: 0 0.5rem; /* Добавить небольшой горизонтальный отступ */
+    }
+}
+
+/* Medium devices (tablets, 768px and up, but less than 1024px) */
+@media (min-width: 601px) and (max-width: 1024px) {
+    :root {
+        font-size: 15px; /* Немного уменьшить базовый размер шрифта для планшетов */
+    }
+
+    .top-nav-bar {
+        padding: 0 1.5rem; /* Увеличить padding по бокам */
+        height: 2.5rem; /* Увеличить высоту */
+    }
+
+    .logo-text {
+        font-size: 0.8rem;
+    }
+
+    .game-nav ul {
+        gap: 1rem;
+    }
+
+    .nav-item-top {
+        font-size: 0.85rem;
+    }
+
+    .content-wrapper {
+        padding: 0 1.5rem; /* Соответствующий padding */
+        padding-top: 5rem; /* Учитываем высоту топ-бара и хедера */
+    }
+
+    .header-main-section {
+        flex-wrap: wrap; /* Все еще может потребоваться обернуть элементы */
+        gap: 1.5rem; /* Увеличить зазор */
+        padding: 0.8rem 0;
+    }
+
+    .search-bar {
+        max-width: 60%; /* Ограничить ширину поисковой строки, чтобы дать место другим элементам */
+    }
+
+    .user-actions {
+        gap: 1.5rem;
+    }
+
+    .sign-in {
+        font-size: 0.9rem;
+        padding: 0.4rem 1rem;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+        line-height: 3.2rem;
+        margin-bottom: 2rem;
+    }
+
+    .stats-group {
+        gap: 2rem;
+    }
+
+    .stat-number {
+        font-size: 1.25rem;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+    }
+
+    .download-button-hero {
+        position: absolute; /* Вернуть абсолютное позиционирование, если есть место */
+        right: 1.5rem; /* Отступ справа */
+        top: 150px; /* Приблизительно по макету */
+        width: 12rem;
+        height: 3.2rem;
+        font-size: 0.9rem;
+    }
+    /* Если download-button-hero не помещается рядом, его можно снова сделать static
+       в другом медиа-запросе для очень маленьких планшетов, или flex-grow: 1 для героя */
+    .hero-section {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+    }
+
+    .games-header {
+        margin-bottom: 1.8rem;
+    }
+
+    .all-games-title {
+        font-size: 1.3rem;
+    }
+
+    .sort-by {
+        font-size: 0.85rem;
+    }
+
+    .game-cards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); /* 2-3 колонки */
+        gap: 1.5rem;
+    }
+
+    .game-card {
+        width: 100%; /* Карточки заполняют свою колонку */
+        height: 14rem;
+    }
+    .game-card .game-title {
+        font-size: 0.85rem;
+    }
+
+    .main-footer {
+        padding: 4rem 1.5rem 2rem;
+        margin-top: 4rem;
+    }
+
+    .footer-left {
+        width: 30%; /* Выделить больше места для левой колонки */
+        margin-right: 2rem;
+        margin-bottom: 0;
+    }
+
+    .footer-center {
+        gap: 3rem; /* Увеличить зазор между колонками */
+        flex-wrap: nowrap; /* Постараться не переносить колонки */
+        width: auto;
+    }
+    .footer-column {
+        flex-basis: auto; /* Allow columns to size based on content */
+        min-width: 8rem; /* Set a minimum width */
+    }
+
+    .footer-heading {
+        font-size: 0.8rem;
+    }
+
+    .footer-column ul li a {
+        font-size: 0.9rem;
+    }
+
+    .footer-bottom {
+        flex-direction: row; /* Снова выровнять в ряд */
+        justify-content: space-between;
+    }
+
+    .copyright, .footer-link {
+        width: auto; /* Снова позволить им занимать ширину по контенту */
+        margin-bottom: 0;
+        font-size: 0.75rem;
+    }
+}
+
+/* Large devices (desktops, 1025px and up) */
+@media (min-width: 1025px) {
+    :root {
+        font-size: 16px; /* Возвращаем стандартный базовый размер */
+    }
+
+    .top-nav-bar {
+        padding: 0 100px; /* Вернуть оригинальный padding */
+        height: 32px;
+    }
+
+    .logo-text {
+        font-size: 12px;
+    }
+
+    .game-nav ul {
+        gap: 15px;
+    }
+
+    .nav-item-top {
+        font-size: 13px;
+    }
+
+    .content-wrapper {
+        padding: 0 100px;
+        padding-top: 60px;
+    }
+
+    .header-main-section {
+        flex-wrap: nowrap; /* Не переносить элементы */
+        padding: 0;
+    }
+
+    .search-bar {
+        width: 827px; /* Вернуть оригинальную ширину */
+        max-width: none;
+    }
+
+    .user-actions {
+        gap: 20px;
+    }
+
+    .sign-in {
+        font-size: 14px;
+        padding: 6px 15px;
+        width: 97px;
+        height: 32px;
+    }
+
+    .hero-title {
+        font-size: 28px;
+        line-height: 42px;
+        margin-bottom: 30px;
+        max-width: 888px;
+    }
+
+    .stats-group {
+        gap: 30px;
+        flex-wrap: nowrap;
+    }
+
+    .stat-divider {
+        display: block; /* Снова показать разделители */
+    }
+
+    .download-button-hero {
+        position: absolute;
+        right: 0;
+        top: 205px;
+        width: 175px;
+        height: 45px;
+        font-size: 14px;
+        margin-top: 0; /* Сбросить margin */
+    }
+
+    .games-header {
+        flex-wrap: nowrap;
+    }
+
+    .all-games-title {
+        font-size: 18px;
+    }
+
+    .sort-by {
+        font-size: 12px;
+    }
+
+    .game-cards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); /* Вернуть оригинальный размер */
+        gap: 20px;
+    }
+
+    .game-card {
+        width: 195px;
+        height: 260px;
+    }
+    .game-card .game-title {
+        font-size: 14px;
+    }
+    .coming-soon-tag {
+        font-size: 8px;
+        width: 71px;
+        height: 18px;
+    }
+
+    .main-footer {
+        padding: 60px 100px 30px;
+        margin-top: 100px;
+        flex-direction: row; /* Снова выровнять в ряд */
+    }
+
+    .footer-left {
+        width: 250px;
+        margin-right: 40px;
+        margin-bottom: 0;
+    }
+
+    .footer-center {
+        gap: 80px;
+        flex-wrap: nowrap;
+    }
+
+    .footer-column {
+        flex-basis: auto;
+        min-width: auto;
+    }
+
+    .footer-heading {
+        font-size: 12px;
+    }
+
+    .footer-column ul li a {
+        font-size: 16px;
+    }
+
+    .footer-bottom {
+        flex-direction: row;
+        margin-top: 50px;
+    }
+
+    .copyright, .footer-link {
+        font-size: 12px;
+        width: auto;
+        margin-bottom: 0;
+        text-align: left;
+    }
 }
