@@ -1,0 +1,656 @@
+/* Universal styles and font imports */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Poller+One&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #0E1015; /* Main background */
+    color: #EFECF0;
+    line-height: 1.5;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Main Container and Background Effects */
+.main-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    /* Removed padding-top here as the fixed top-nav-bar handles it */
+    z-index: 1; /* Ensure content is above background effects */
+}
+
+/* Background Ellipses (approximating positions and blur) */
+/* These are kept as absolute to recreate the background effect */
+.main-container::before { /* Ellipse 143 */
+    content: '';
+    position: absolute;
+    width: 2643px; /* Original width */
+    height: 2892px; /* Original height */
+    left: -224px; /* Original left */
+    top: -952px; /* Original top */
+    background: linear-gradient(180deg, #190518 0%, rgba(25, 5, 24, 0) 100%);
+    filter: blur(282.9px);
+    z-index: -2; /* Behind content */
+}
+
+.main-container::after { /* Ellipse 145 */
+    content: '';
+    position: absolute;
+    width: 369px; /* Original width */
+    height: 353px; /* Original height */
+    left: -114px; /* Original left */
+    top: -101px; /* Original top */
+    background: #EA103C;
+    opacity: 0.23;
+    filter: blur(282.9px);
+    z-index: -1; /* Behind content, above other ellipse */
+}
+
+
+/* Top Nav Bar (The very top thin bar) */
+.top-nav-bar {
+    position: fixed; /* Fixed to the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 32px; /* Rectangle 205 */
+    background: #0E1015;
+    display: flex;
+    align-items: center;
+    padding: 0 100px; /* Adjusted padding to match content-wrapper alignment */
+    z-index: 100; /* Ensure it's on top */
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Space between logo and game nav */
+}
+
+.logo-icon { /* Vector 17 */
+    width: 12px;
+    height: 15px;
+    background: url("Vector17.png");
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.logo-text { /* TRACKX */
+    font-family: 'Poller One', cursive;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #FFFFFF;
+}
+
+.game-nav ul {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Adjust gap as needed */
+}
+
+.nav-item-top {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: -0.05em;
+    color: #484B51;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.game-nav .divider {
+    width: 2px;
+    height: 18px; /* Adjusted from 32px for better visual */
+    background: #191B20;
+}
+
+/* Content Wrapper to apply padding/margins to the main body content */
+.content-wrapper {
+    max-width: 1366px; /* Based on Frame 16 width */
+    margin: 0 auto; /* Center the content */
+    padding: 0 100px; /* Consistent padding */
+    position: relative; /* For absolute positioning of children */
+    padding-top: 60px; /* Space for the fixed top-nav-bar */
+    padding-bottom: 200px; /* Give space before the footer starts */
+}
+
+
+/* Header section with search and user actions */
+.header-main-section {
+    position: relative;
+    width: 100%;
+    height: 58px;
+    background: #0E1015;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 20px;
+    /* Removed fixed top/left and relative left properties for better flow */
+}
+
+.search-bar {
+    position: relative;
+    width: 827px;
+    height: 28px;
+    background: #1B1D23;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(2px);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    /* Removed absolute/relative left here */
+}
+
+.search-bar input {
+    background: transparent;
+    border: none;
+    color: #797C83;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    line-height: 15px;
+    margin-left: 8px;
+    outline: none;
+    width: calc(100% - 30px);
+}
+
+.search-icon {
+    width: 12px;
+    height: 12px;
+    background: #797C83;
+    display: inline-block;
+    -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="%23797C83" d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.483 3.483a1 1 0 0 0 1.414-1.414l-3.483-3.483zM6.5 11C4.015 11 2 8.985 2 6.5S4.015 2 6.5 2 11 4.015 11 6.5 8.985 11 6.5 11z"/></svg>') no-repeat 50% 50%;
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="%23797C83" d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.483 3.483a1 1 0 0 0 1.414-1.414l-3.483-3.483zM6.5 11C4.015 11 2 8.985 2 6.5S4.015 2 6.5 2 11 4.015 11 6.5 8.985 11 6.5 11z"/></svg>') no-repeat 50% 50%;
+    -webkit-mask-size: cover;
+    mask-size: cover;
+}
+
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    /* Removed absolute/relative right here */
+}
+
+.language-select, .sign-in {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #898D94;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.sign-in {
+    background: linear-gradient(180deg, #272A30 0%, rgba(39, 42, 48, 0) 100%);
+    border-radius: 4px;
+    padding: 6px 15px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    width: 97px;
+    height: 32px;
+    justify-content: center;
+}
+
+.profile-icon {
+    width: 15px;
+    height: 15px;
+    background: #999CA3;
+    display: inline-block;
+    background: url('Vector.png') center/cover no-repeat;
+}
+
+.header-divider { /* Rectangle 234 */
+    width: 100%;
+    height: 1px;
+    background: #13151B;
+    border: none;
+    margin-top: 5px; /* Adjust spacing as needed */
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    padding: 40px 0;
+    text-align: left;
+    margin-bottom: 50px;
+}
+
+.hero-title { /* Personalized Stats... */
+    max-width: 888px; /* Original width, changed to max-width for responsiveness */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 42px;
+    color: #EFECF0;
+    margin-bottom: 30px;
+    margin-left: 0; /* Resetting any explicit left positioning */
+}
+
+.stats-group { /* Group 1 */
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    margin-left: 0; /* Resetting any explicit left positioning */
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 27px;
+    color: #EFECF0;
+}
+
+.stat-label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20px;
+    color: #EFECF0;
+}
+
+.stat-divider { /* Rectangle 56, 59 */
+    width: 1px;
+    height: 48px;
+    background: #272A30;
+    transform: matrix(1, 0, 0, 1, 0, 0); /* Resetting the matrix */
+}
+
+.compliant-logos {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.riot-logo, .epic-logo, .ea-logo {
+    width: 26px;
+    height: 26px;
+    background-color: #EFECF0; /* Placeholder color */
+    border-radius: 50%; /* Approximating circular logos */
+    mix-blend-mode: hard-light;
+    display: inline-block;
+}
+/* You would replace background-color with actual background-image for logos */
+.riot-logo { background: url('riot-games-logo2.png') center/cover no-repeat; }
+.epic-logo { background: url('epic_logo_black2.png') center/cover no-repeat; }
+.ea-logo { background: url('images(1)2.png') center/cover no-repeat; } /* Assuming you have an EA logo image */
+
+
+.download-button-hero { /* Rectangle 58 & Frame 17 */
+    position: absolute; /* Kept absolute to position it precisely */
+    right: 0; /* Position to the right within its containing block */
+    top: 205px; /* Adjust top relative to hero section (where Figma had it: 205px from top of frame) */
+    width: 175px;
+    height: 45px;
+    background: #E9213D;
+    border-radius: 4px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    color: #EFECF0;
+}
+
+.download-icon { /* RE1Mu3b 1 */
+    width: 21px;
+    height: 21px;
+    background: url('RE1Mu3b.png') center/contain no-repeat;
+    display: inline-block;
+}
+
+/* Games Section */
+.games-section {
+    padding-top: 20px;
+}
+
+.games-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    margin-left: 0; /* Resetting explicit left positioning */
+}
+
+.all-games-title { /* All Games */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 27px;
+    color: #EFECF0;
+}
+
+.sort-by { /* Sort by popularity */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    color: #444444;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.sort-arrow { /* Vector 10 */
+    width: 8px;
+    height: 7px;
+    background: #FFFFFF;
+    opacity: 0.5;
+    border-radius: 0.1px;
+    clip-path: polygon(0% 0%, 100% 0%, 50% 100%); /* Simple downward arrow */
+    display: inline-block;
+}
+
+.game-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); /* Game cards width 195px */
+    gap: 20px; /* Adjust spacing between cards */
+    /* Removed explicit left positioning, grid will handle centering/distribution */
+    /* width: calc(100% - 77px); /* Adjust width to fit */
+    justify-items: start; /* Align items to the start of their grid area */
+}
+
+.game-card {
+    position: relative;
+    width: 195px;
+    height: 260px; /* Standard card height */
+    background: #D9D9D9; /* Placeholder background */
+    border-radius: 5px;
+    overflow: hidden; /* Ensure image fits */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Added for image 7, 8 */
+}
+
+.game-card .game-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    z-index: 1;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); /* Image 7, 8 */
+}
+
+.game-card .game-title {
+    position: relative; /* Position above image */
+    z-index: 2;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 21px;
+    color: #EFECF0;
+    margin-top: 10px; /* Space from bottom of image */
+    text-align: center;
+}
+
+/* Specific image adjustments based on Figma properties */
+.game-card:nth-child(1) .game-image { /* League of Legends */
+    /* width: 196px; height: 265px; left: 180px; top: 338px; */
+    /* These are absolute positions from Figma, adapting to relative */
+}
+.game-card:nth-child(3) .game-image { /* Valorant */
+    /* width: 195px; height: 260px; left: 591px; top: 338px; */
+    backdrop-filter: blur(2px);
+}
+.game-card:nth-child(4) .game-image { /* Team fight */
+    /* width: 198px; height: 266px; left: 796px; top: 335px; */
+    /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
+}
+.game-card:nth-child(5) .game-image { /* Apex Legend */
+    /* width: 193px; height: 267px; left: 1001px; top: 338px; */
+    /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
+}
+
+/* Titles for games in the grid, overriding default if needed */
+.game-card:nth-child(2) .game-title { /* Counter Strike */
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+.game-card:nth-child(3) .game-title { /* Valorant */
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+.game-card:nth-child(4) .game-title { /* Team fight */
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+.game-card:nth-child(5) .game-title { /* Apex Legend */
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+.game-card:nth-child(7) .game-title { /* ESLAPE */
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+.game-card:nth-child(8) .game-title { /* Destiny 2 */
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
+.coming-soon-tag { /* Rectangle 80 & COMING SOON */
+    position: absolute;
+    bottom: 5px; /* Adjust as needed */
+    right: 5px; /* Adjust as needed */
+    width: 71px;
+    height: 18px;
+    background: #212227;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 0; /* No explicit border-radius */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 8px;
+    line-height: 12px;
+    color: #64676D;
+    z-index: 3; /* Above image and title */
+}
+
+
+/* Footer Section */
+.main-footer {
+    position: relative;
+    width: 100%;
+    background: #14161B;
+    padding: 60px 100px 30px; /* Adjust padding as needed, especially top to create space */
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap */
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 100px; /* Add some space between game grid and footer */
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 250px; /* Adjust width as needed */
+    margin-right: 40px; /* Space from center columns */
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo-icon-footer { /* Vector 11 */
+    width: 27px;
+    height: 33px;
+    background: url("Vector11.png");
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.logo-text-footer { /* AYUSHB */
+    font-family: 'Poller One', cursive;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #FFFFFF;
+}
+
+.download-button-footer { /* Rectangle 69 & Download Now */
+    width: 218px;
+    height: 44px;
+    background: #D5224E;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 27px;
+    color: #FFFFFF;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.fully-compliant-footer { /* Fully Complaint */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.04em;
+    color: #FFFFFF;
+    margin-bottom: 15px;
+}
+
+.footer-game-logos {
+    display: flex;
+    gap: 15px; /* Adjust gap */
+}
+
+.riot-logo-footer, .epic-logo-footer, .ea-logo-footer {
+    width: 30px; /* Adjusted size */
+    height: 30px; /* Adjusted size */
+    background-color: #EFECF0; /* Placeholder */
+    mix-blend-mode: hard-light;
+    border-radius: 50%; /* Approximating circular */
+    display: inline-block;
+    background-size: cover; /* Ensure logos fit */
+    background-position: center; /* Center logos */
+}
+.riot-logo-footer { background-image: url('riot-games-logo2.png'); } /* riot-games-logo 1 */
+.epic-logo-footer { background-image: url('epic_logo_black2.png'); } /* epic_logo_black 1 */
+.ea-logo-footer { background-image: url('images(1)2.png'); border-radius: 2122px; } /* images (1) 1 - special border radius */
+
+.footer-center {
+    display: flex;
+    gap: 80px; /* Space between columns */
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-heading { /* COMPANY, SOCIALS, SUPPORTED GAMES */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    color: #7E8087; /* For COMPANY */
+    margin-bottom: 15px;
+}
+
+.footer-column ul li {
+    margin-bottom: 8px; /* Spacing for list items */
+}
+
+.footer-column ul li a {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 29px; /* Or 181% */
+    color: #FFFFFF;
+    transition: color 0.3s ease;
+}
+
+/* Adjusting specific footer headings and links as per Figma */
+.footer-center .footer-column:nth-child(1) ul li a { /* COMPANY list items */
+    font-weight: 600;
+}
+.footer-center .footer-column:nth-child(2) .footer-heading { /* SOCIALS */
+    font-weight: 500;
+    color: #787B81;
+}
+.footer-center .footer-column:nth-child(2) ul li a { /* SOCIALS list items */
+    font-weight: 500;
+}
+.footer-center .footer-column:nth-child(3) .footer-heading { /* SUPPORTED GAMES */
+    color: #787B81;
+}
+.footer-center .footer-column:nth-child(3) ul li a { /* SUPPORTED GAMES list items */
+    font-weight: 600;
+}
+
+
+.footer-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Optional: add a separator line */
+    padding-top: 20px;
+}
+
+.copyright, .footer-link {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    color: #7E8087; /* For 'Made with Lots of Love'
+}
