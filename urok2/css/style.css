@@ -1,8 +1,10 @@
-/* Universal styles and font imports */
+/* =========================================
+   1. БАЗОВЫЕ СТИЛИ (BASE STYLES)
+   ========================================= */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Poller+One&display=swap');
 
 :root {
-    font-size: 16px; /* Base font size for rem units */
+    font-size: 16px;
 }
 
 * {
@@ -13,10 +15,10 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #0E1015; /* Main background */
+    background-color: #0E1015;
     color: #EFECF0;
     line-height: 1.5;
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-x: hidden;
 }
 
 a {
@@ -28,58 +30,59 @@ ul {
     list-style: none;
 }
 
-/* Main Container and Background Effects */
+/* =========================================
+   2. КОНТЕЙНЕР И ФОН (LAYOUT)
+   ========================================= */
 .main-container {
     position: relative;
     width: 100%;
     min-height: 100vh;
-    z-index: 1; /* Ensure content is above background effects */
+    z-index: 1;
 }
 
-/* Background Ellipses (approximating positions and blur) */
-/* These are kept as absolute to recreate the background effect,
-   but we'll scale them using vw/vh for better responsiveness if they are purely decorative */
-.main-container::before { /* Ellipse 143 */
+/* Эффекты фона */
+.main-container::before {
     content: '';
     position: absolute;
-    width: 150vw; /* Scaled width */
-    height: 150vh; /* Scaled height */
-    left: -10vw; /* Scaled left */
-    top: -50vh; /* Scaled top */
+    width: 150vw;
+    height: 150vh;
+    left: -10vw;
+    top: -50vh;
     background: linear-gradient(180deg, #190518 0%, rgba(25, 5, 24, 0) 100%);
-    filter: blur(min(15vw, 282.9px)); /* Adjust blur relative to viewport or max value */
-    z-index: -2; /* Behind content */
-    border-radius: 50%; /* Make it look like an ellipse */
+    filter: blur(min(15vw, 282.9px));
+    z-index: -2;
+    border-radius: 50%;
 }
 
-.main-container::after { /* Ellipse 145 */
+.main-container::after {
     content: '';
     position: absolute;
-    width: 30vw; /* Scaled width */
-    height: 30vh; /* Scaled height */
-    left: -5vw; /* Scaled left */
-    top: -5vh; /* Scaled top */
+    width: 30vw;
+    height: 30vh;
+    left: -5vw;
+    top: -5vh;
     background: #EA103C;
     opacity: 0.23;
-    filter: blur(min(10vw, 282.9px)); /* Adjust blur */
-    z-index: -1; /* Behind content, above other ellipse */
-    border-radius: 50%; /* Make it look like an ellipse */
+    filter: blur(min(10vw, 282.9px));
+    z-index: -1;
+    border-radius: 50%;
 }
 
-
-/* Top Nav Bar (The very top thin bar) */
+/* =========================================
+   3. НАВИГАЦИЯ (TOP NAV)
+   ========================================= */
 .top-nav-bar {
-    position: fixed; /* Fixed to the top */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 2rem; /* Adjusted to rem */
+    height: 2rem;
     background: #0E1015;
     display: flex;
     align-items: center;
-    padding: 0 1rem; /* Smaller padding for mobile, adjusted below */
-    z-index: 100; /* Ensure it's on top */
-    justify-content: space-between; /* Space out items */
+    padding: 0 1rem;
+    z-index: 100;
+    justify-content: space-between;
 }
 
 .logo-section {
@@ -99,79 +102,84 @@ ul {
 .logo-text {
     font-family: 'Poller One', cursive;
     font-weight: 400;
-    font-size: 0.75rem; /* Adjusted to rem */
-    line-height: 0.875rem; /* Adjusted to rem */
+    font-size: 0.75rem;
+    line-height: 0.875rem;
     color: #FFFFFF;
 }
 
 .game-nav {
-    flex-grow: 1; /* Allow it to take available space */
-    overflow-x: auto; /* Allow scrolling for many items */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    flex-grow: 1;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .game-nav ul {
     display: flex;
     align-items: center;
-    gap: 0.8rem; /* Adjusted gap to rem */
+    gap: 0.8rem;
 }
 
 .nav-item-top {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    font-size: 0.8125rem; /* Adjusted to rem */
-    line-height: 1rem; /* Adjusted to rem */
+    font-size: 0.8125rem;
+    line-height: 1rem;
     letter-spacing: -0.05em;
     color: #484B51;
-    white-space: nowrap; /* Prevent wrapping */
+    white-space: nowrap;
 }
 
 .game-nav .divider {
-    width: 0.125rem; /* Adjusted to rem */
-    height: 1.125rem; /* Adjusted to rem */
+    width: 0.125rem;
+    height: 1.125rem;
     background: #191B20;
-    flex-shrink: 0; /* Prevent divider from shrinking */
+    flex-shrink: 0;
 }
 
-/* Content Wrapper to apply padding/margins to the main body content */
+/* Content Wrapper */
 .content-wrapper {
-    max-width: 1366px; /* Keeping max-width for large screens */
-    margin: 0 auto; /* Center the content */
-    padding: 0 1rem; /* Smaller default padding */
+    max-width: 1366px;
+    margin: 0 auto;
+    padding: 0 1rem;
     position: relative;
-    padding-top: 4rem; /* Space for the fixed top-nav-bar and potential fixed header */
-    padding-bottom: 5rem; /* Give space before the footer starts */
+    padding-top: 4rem;
+    padding-bottom: 5rem;
 }
 
-
-/* Header section with search and user actions */
+/* =========================================
+   4. ШАПКА И ПОИСК (HEADER SECTION)
+   ========================================= */
 .header-main-section {
     position: relative;
     width: 100%;
-    height: auto; /* Allow height to adjust */
+    height: auto;
     background: #0E1015;
     display: flex;
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin-bottom: 1.25rem; /* Adjusted to rem */
-    padding: 0.5rem 0; /* Add some vertical padding */
+    margin-bottom: 1.25rem;
+    padding: 0.5rem 0;
 }
 
 .search-bar {
-    position: relative;
-    width: 100%; /* Full width on smaller screens */
-    max-width: 827px; /* Max width for larger screens */
-    height: 1.75rem; /* Adjusted to rem */
+    /* Исправлено для работы выпадающего списка */
+    position: relative !important;
+    z-index: 50;
+    overflow: visible !important;
+
+    width: 100%;
+    max-width: 827px;
+    height: 1.75rem;
     background: #1B1D23;
     border: 1px solid rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(2px);
-    border-radius: 0.25rem; /* Adjusted to rem */
+    border-radius: 0.25rem;
     display: flex;
     align-items: center;
-    padding: 0 0.625rem; /* Adjusted to rem */
-    flex-grow: 1; /* Allow it to grow */
+    padding: 0 0.625rem;
+    flex-grow: 1;
 }
 
 .search-bar input {
@@ -179,16 +187,16 @@ ul {
     border: none;
     color: #797C83;
     font-family: 'Inter', sans-serif;
-    font-size: 0.75rem; /* Adjusted to rem */
-    line-height: 0.9375rem; /* Adjusted to rem */
-    margin-left: 0.5rem; /* Adjusted to rem */
+    font-size: 0.75rem;
+    line-height: 0.9375rem;
+    margin-left: 0.5rem;
     outline: none;
-    width: calc(100% - 2rem); /* Adjust width to account for icon */
+    width: calc(100% - 2rem);
 }
 
 .search-icon {
-    width: 0.75rem; /* Adjusted to rem */
-    height: 0.75rem; /* Adjusted to rem */
+    width: 0.75rem;
+    height: 0.75rem;
     background: #797C83;
     display: inline-block;
     -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="%23797C83" d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.483 3.483a1 1 0 0 0 1.414-1.414l-3.483-3.483zM6.5 11C4.015 11 2 8.985 2 6.5S4.015 2 6.5 2 11 4.015 11 6.5 8.985 11 6.5 11z"/></svg>') no-repeat 50% 50%;
@@ -198,75 +206,76 @@ ul {
     flex-shrink: 0;
 }
 
-
 .user-actions {
     display: flex;
     align-items: center;
-    gap: 1.25rem; /* Adjusted to rem */
-    margin-top: 0; /* Reset */
+    gap: 1.25rem;
+    margin-top: 0;
 }
 
 .language-select, .sign-in {
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    font-size: 0.875rem; /* Adjusted to rem */
-    line-height: 1.3125rem; /* Adjusted to rem */
+    font-size: 0.875rem;
+    line-height: 1.3125rem;
     color: #898D94;
     display: flex;
     align-items: center;
-    gap: 0.3125rem; /* Adjusted to rem */
+    gap: 0.3125rem;
 }
 
 .sign-in {
     background: linear-gradient(180deg, #272A30 0%, rgba(39, 42, 48, 0) 100%);
-    border-radius: 0.25rem; /* Adjusted to rem */
-    padding: 0.375rem 0.9375rem; /* Adjusted to rem */
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.9375rem;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    width: auto; /* Allow width to adjust */
-    height: 2rem; /* Adjusted to rem */
+    width: auto;
+    height: 2rem;
     justify-content: center;
-    white-space: nowrap; /* Prevent wrapping */
+    white-space: nowrap;
 }
 
 .profile-icon {
-    width: 0.9375rem; /* Adjusted to rem */
-    height: 0.9375rem; /* Adjusted to rem */
+    width: 0.9375rem;
+    height: 0.9375rem;
     background: url('Vector.png') center/cover no-repeat;
     display: inline-block;
 }
 
 .header-divider {
     width: 100%;
-    height: 0.0625rem; /* Adjusted to rem */
+    height: 0.0625rem;
     background: #13151B;
     border: none;
-    margin-top: 0.3125rem; /* Adjusted to rem */
+    margin-top: 0.3125rem;
 }
 
-/* Hero Section */
+/* =========================================
+   5. ГЛАВНЫЙ ЭКРАН (HERO SECTION)
+   ========================================= */
 .hero-section {
     position: relative;
-    padding: 2.5rem 0; /* Adjusted to rem */
+    padding: 2.5rem 0;
     text-align: left;
-    margin-bottom: 3.125rem; /* Adjusted to rem */
+    margin-bottom: 3.125rem;
 }
 
 .hero-title {
-    max-width: 55.5rem; /* Keeping max-width, adjusted to rem */
+    max-width: 55.5rem;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 1.75rem; /* Adjusted to rem */
-    line-height: 2.625rem; /* Adjusted to rem */
+    font-size: 1.75rem;
+    line-height: 2.625rem;
     color: #EFECF0;
-    margin-bottom: 1.875rem; /* Adjusted to rem */
+    margin-bottom: 1.875rem;
 }
 
 .stats-group {
     display: flex;
     align-items: center;
-    gap: 1.875rem; /* Adjusted to rem */
-    margin-bottom: 2.5rem; /* Adjusted to rem */
-    flex-wrap: wrap; /* Allow stats to wrap */
+    gap: 1.875rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
 }
 
 .stat-item {
@@ -277,37 +286,37 @@ ul {
 .stat-number {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 1.125rem; /* Adjusted to rem */
-    line-height: 1.6875rem; /* Adjusted to rem */
+    font-size: 1.125rem;
+    line-height: 1.6875rem;
     color: #EFECF0;
 }
 
 .stat-label {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 0.8125rem; /* Adjusted to rem */
-    line-height: 1.25rem; /* Adjusted to rem */
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
     color: #EFECF0;
 }
 
 .stat-divider {
-    width: 0.0625rem; /* Adjusted to rem */
-    height: 3rem; /* Adjusted to rem */
+    width: 0.0625rem;
+    height: 3rem;
     background: #272A30;
-    flex-shrink: 0; /* Prevent shrinking */
+    flex-shrink: 0;
 }
 
 .compliant-logos {
     display: flex;
-    gap: 0.625rem; /* Adjusted to rem */
-    margin-top: 0.3125rem; /* Adjusted to rem */
-    flex-wrap: wrap; /* Allow logos to wrap */
+    gap: 0.625rem;
+    margin-top: 0.3125rem;
+    flex-wrap: wrap;
 }
 
 .riot-logo, .epic-logo, .ea-logo {
-    width: 1.625rem; /* Adjusted to rem */
-    height: 1.625rem; /* Adjusted to rem */
-    background-color: #EFECF0; /* Placeholder color */
+    width: 1.625rem;
+    height: 1.625rem;
+    background-color: #EFECF0;
     border-radius: 50%;
     mix-blend-mode: hard-light;
     display: inline-block;
@@ -319,51 +328,53 @@ ul {
 .ea-logo { background-image: url('images(1)2.png'); }
 
 .download-button-hero {
-    position: static; /* Changed to static for better flow on small screens */
-    margin-top: 1.5rem; /* Add margin when static */
-    width: 100%; /* Full width on small screens */
-    max-width: 10.9375rem; /* Max width for larger screens, adjusted to rem */
-    height: 2.8125rem; /* Adjusted to rem */
+    position: static;
+    margin-top: 1.5rem;
+    width: 100%;
+    max-width: 10.9375rem;
+    height: 2.8125rem;
     background: #E9213D;
-    border-radius: 0.25rem; /* Adjusted to rem */
+    border-radius: 0.25rem;
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem; /* Adjusted to rem */
+    gap: 0.5rem;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 0.875rem; /* Adjusted to rem */
-    line-height: 1.3125rem; /* Adjusted to rem */
+    font-size: 0.875rem;
+    line-height: 1.3125rem;
     color: #EFECF0;
 }
 
 .download-icon {
-    width: 1.3125rem; /* Adjusted to rem */
-    height: 1.3125rem; /* Adjusted to rem */
+    width: 1.3125rem;
+    height: 1.3125rem;
     background: url('RE1Mu3b.png') center/contain no-repeat;
     display: inline-block;
 }
 
-/* Games Section */
+/* =========================================
+   6. КАРТОЧКИ ИГР (GAMES SECTION)
+   ========================================= */
 .games-section {
-    padding-top: 1.25rem; /* Adjusted to rem */
+    padding-top: 1.25rem;
 }
 
 .games-header {
     display: flex;
     align-items: center;
-    gap: 0.9375rem; /* Adjusted to rem */
-    margin-bottom: 1.5625rem; /* Adjusted to rem */
-    flex-wrap: wrap; /* Allow items to wrap */
+    gap: 0.9375rem;
+    margin-bottom: 1.5625rem;
+    flex-wrap: wrap;
 }
 
 .all-games-title {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 1.125rem; /* Adjusted to rem */
-    line-height: 1.6875rem; /* Adjusted to rem */
+    font-size: 1.125rem;
+    line-height: 1.6875rem;
     color: #EFECF0;
     white-space: nowrap;
 }
@@ -371,45 +382,51 @@ ul {
 .sort-by {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 0.75rem; /* Adjusted to rem */
-    line-height: 1.125rem; /* Adjusted to rem */
+    font-size: 0.75rem;
+    line-height: 1.125rem;
     color: #444444;
     display: flex;
     align-items: center;
-    gap: 0.3125rem; /* Adjusted to rem */
+    gap: 0.3125rem;
     white-space: nowrap;
 }
 
 .sort-arrow {
-    width: 0.5rem; /* Adjusted to rem */
-    height: 0.4375rem; /* Adjusted to rem */
+    width: 0.5rem;
+    height: 0.4375rem;
     background: #FFFFFF;
     opacity: 0.5;
-    border-radius: 0.00625rem; /* Adjusted to rem */
+    border-radius: 0.00625rem;
     clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
     display: inline-block;
 }
 
 .game-cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); /* Adjusted min-width for cards to rem */
-    gap: 1.25rem; /* Adjusted to rem */
-    justify-items: center; /* Center cards in their grid area */
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: 1.25rem;
+    justify-items: center;
 }
 
 .game-card {
     position: relative;
-    width: 12.1875rem; /* Fixed width, adjusted to rem */
-    height: 16.25rem; /* Standard card height, adjusted to rem */
+    width: 12.1875rem;
+    height: 16.25rem;
     background: #D9D9D9;
-    border-radius: 0.3125rem; /* Adjusted to rem */
+    border-radius: 0.3125rem;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    padding-bottom: 0.625rem; /* Adjusted to rem */
+    padding-bottom: 0.625rem;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    /* 3D Стили */
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease;
+    will-change: transform;
+    background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
 }
 
 .game-card .game-image {
@@ -419,7 +436,7 @@ ul {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 0.25rem; /* Adjusted to rem */
+    border-radius: 0.25rem;
     z-index: 1;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
@@ -429,15 +446,30 @@ ul {
     z-index: 2;
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
-    font-size: 0.875rem; /* Adjusted to rem */
-    line-height: 1.3125rem; /* Adjusted to rem */
+    font-size: 0.875rem;
+    line-height: 1.3125rem;
     color: #EFECF0;
-    margin-top: 0.625rem; /* Adjusted to rem */
+    margin-top: 0.625rem;
     text-align: center;
 }
 
-/* Specific image adjustments based on Figma properties (keep if specific images need unique styles) */
-/* Titles for games in the grid, overriding default if needed */
+.game-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(125deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 60%);
+    border-radius: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+.game-card:hover::after {
+    opacity: 1;
+}
+
 .game-card:nth-child(2) .game-title,
 .game-card:nth-child(3) .game-title,
 .game-card:nth-child(4) .game-title,
@@ -445,17 +477,17 @@ ul {
 .game-card:nth-child(7) .game-title,
 .game-card:nth-child(8) .game-title {
     font-weight: 500;
-    font-size: 0.8125rem; /* Adjusted to rem */
-    line-height: 1.25rem; /* Adjusted to rem */
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
     color: #FFFFFF;
 }
 
 .coming-soon-tag {
     position: absolute;
-    bottom: 0.3125rem; /* Adjusted to rem */
-    right: 0.3125rem; /* Adjusted to rem */
-    width: 4.4375rem; /* Adjusted to rem */
-    height: 1.125rem; /* Adjusted to rem */
+    bottom: 0.3125rem;
+    right: 0.3125rem;
+    width: 4.4375rem;
+    height: 1.125rem;
     background: #212227;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 0;
@@ -464,98 +496,99 @@ ul {
     justify-content: center;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    font-size: 0.5rem; /* Adjusted to rem */
-    line-height: 0.75rem; /* Adjusted to rem */
+    font-size: 0.5rem;
+    line-height: 0.75rem;
     color: #64676D;
     z-index: 3;
 }
 
-
-/* Footer Section */
+/* =========================================
+   7. ФУТЕР (FOOTER)
+   ========================================= */
 .main-footer {
     position: relative;
     width: 100%;
     background: #14161B;
-    padding: 3.75rem 1rem 1.875rem; /* Adjusted padding, smaller for mobile */
+    padding: 3.75rem 1rem 1.875rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: 6.25rem; /* Adjusted to rem */
+    margin-top: 6.25rem;
 }
 
 .footer-left {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%; /* Full width on small screens */
-    max-width: 15.625rem; /* Max width for larger screens, adjusted to rem */
-    margin-right: 0; /* Reset margin */
-    margin-bottom: 2rem; /* Add bottom margin for spacing on small screens */
+    width: 100%;
+    max-width: 15.625rem;
+    margin-right: 0;
+    margin-bottom: 2rem;
 }
 
 .footer-logo {
     display: flex;
     align-items: center;
-    margin-bottom: 1.25rem; /* Adjusted to rem */
+    margin-bottom: 1.25rem;
 }
 
 .logo-icon-footer {
-    width: 1.6875rem; /* Adjusted to rem */
-    height: 2.0625rem; /* Adjusted to rem */
+    width: 1.6875rem;
+    height: 2.0625rem;
     background: url("Vector11.png") no-repeat center center / contain;
     display: inline-block;
-    margin-right: 0.3125rem; /* Adjusted to rem */
+    margin-right: 0.3125rem;
 }
 
 .logo-text-footer {
     font-family: 'Poller One', cursive;
     font-weight: 400;
-    font-size: 0.75rem; /* Adjusted to rem */
-    line-height: 0.875rem; /* Adjusted to rem */
+    font-size: 0.75rem;
+    line-height: 0.875rem;
     color: #FFFFFF;
 }
 
 .download-button-footer {
     width: 100%;
-    max-width: 13.625rem; /* Max width for larger screens, adjusted to rem */
-    height: 2.75rem; /* Adjusted to rem */
+    max-width: 13.625rem;
+    height: 2.75rem;
     background: #D5224E;
-    border-radius: 0.25rem; /* Adjusted to rem */
+    border-radius: 0.25rem;
     border: none;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 1.125rem; /* Adjusted to rem */
-    line-height: 1.6875rem; /* Adjusted to rem */
+    font-size: 1.125rem;
+    line-height: 1.6875rem;
     color: #FFFFFF;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.25rem; /* Adjusted to rem */
+    margin-bottom: 1.25rem;
 }
 
 .fully-compliant-footer {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 0.75rem; /* Adjusted to rem */
-    line-height: 1.125rem; /* Adjusted to rem */
+    font-size: 0.75rem;
+    line-height: 1.125rem;
     letter-spacing: -0.04em;
     color: #FFFFFF;
-    margin-bottom: 0.9375rem; /* Adjusted to rem */
+    margin-bottom: 0.9375rem;
 }
 
 .footer-game-logos {
     display: flex;
-    gap: 0.9375rem; /* Adjusted to rem */
-    flex-wrap: wrap; /* Allow logos to wrap */
+    gap: 0.9375rem;
+    flex-wrap: wrap;
 }
 
 .riot-logo-footer, .epic-logo-footer, .ea-logo-footer {
-    width: 1.875rem; /* Adjusted to rem */
-    height: 1.875rem; /* Adjusted to rem */
-    background-color: #EFECF0; /* Placeholder */
+    width: 1.875rem;
+    height: 1.875rem;
+    background-color: #EFECF0;
     mix-blend-mode: hard-light;
     border-radius: 50%;
     display: inline-block;
@@ -564,506 +597,396 @@ ul {
 }
 .riot-logo-footer { background-image: url('riot-games-logo2.png'); }
 .epic-logo-footer { background-image: url('epic_logo_black2.png'); }
-.ea-logo-footer { background-image: url('images(1)2.png'); border-radius: 50%; } /* Changed specific border-radius to 50% for consistency */
+.ea-logo-footer { background-image: url('images(1)2.png'); border-radius: 50%; }
 
 .footer-center {
     display: flex;
-    flex-wrap: wrap; /* Allow columns to wrap */
-    gap: 2.5rem; /* Adjusted gap to rem */
+    flex-wrap: wrap;
+    gap: 2.5rem;
     justify-content: space-between;
-    flex-grow: 1; /* Allow it to take available space */
+    flex-grow: 1;
 }
 
 .footer-column {
     display: flex;
     flex-direction: column;
-    flex-basis: calc(50% - 1.25rem); /* Two columns on medium screens, adjusted for gap */
-    min-width: 9.375rem; /* Minimum width for a column */
+    flex-basis: calc(50% - 1.25rem);
+    min-width: 9.375rem;
 }
 
 .footer-heading {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 0.75rem; /* Adjusted to rem */
-    line-height: 1.125rem; /* Adjusted to rem */
+    font-size: 0.75rem;
+    line-height: 1.125rem;
     color: #7E8087;
-    margin-bottom: 0.9375rem; /* Adjusted to rem */
+    margin-bottom: 0.9375rem;
 }
 
 .footer-column ul li {
-    margin-bottom: 0.5rem; /* Adjusted to rem */
+    margin-bottom: 0.5rem;
 }
 
 .footer-column ul li a {
     font-family: 'Inter', sans-serif;
-    font-size: 1rem; /* Adjusted to rem */
-    line-height: 1.8125rem; /* Adjusted to rem */
+    font-size: 1rem;
+    line-height: 1.8125rem;
     color: #FFFFFF;
     transition: color 0.3s ease;
 }
 
-/* Adjusting specific footer headings and links as per Figma */
-.footer-center .footer-column:nth-child(1) ul li a {
-    font-weight: 600;
-}
-.footer-center .footer-column:nth-child(2) .footer-heading {
-    font-weight: 500;
-    color: #787B81;
-}
-.footer-center .footer-column:nth-child(2) ul li a {
-    font-weight: 500;
-}
-.footer-center .footer-column:nth-child(3) .footer-heading {
-    color: #787B81;
-}
-.footer-center .footer-column:nth-child(3) ul li a {
-    font-weight: 600;
-}
-
+.footer-center .footer-column:nth-child(1) ul li a { font-weight: 600; }
+.footer-center .footer-column:nth-child(2) .footer-heading { font-weight: 500; color: #787B81; }
+.footer-center .footer-column:nth-child(2) ul li a { font-weight: 500; }
+.footer-center .footer-column:nth-child(3) .footer-heading { color: #787B81; }
+.footer-center .footer-column:nth-child(3) ul li a { font-weight: 600; }
 
 .footer-bottom {
     width: 100%;
     display: flex;
-    flex-wrap: wrap; /* Allow items to wrap */
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin-top: 3.125rem; /* Adjusted to rem */
+    margin-top: 3.125rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 1.25rem; /* Adjusted to rem */
+    padding-top: 1.25rem;
 }
 
 .copyright, .footer-link {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    font-size: 0.75rem; /* Adjusted to rem */
-    line-height: 1.125rem; /* Adjusted to rem */
+    font-size: 0.75rem;
+    line-height: 1.125rem;
     color: #7E8087;
-    text-align: center; /* Center text on small screens */
-    width: 100%; /* Full width for stacking */
-    margin-bottom: 0.5rem; /* Add spacing when stacked */
+    text-align: center;
+    width: 100%;
+    margin-bottom: 0.5rem;
 }
 
-/* --- Media Queries for Responsiveness --- */
+/* =========================================
+   8. MEDIA QUERIES (АДАПТИВ)
+   ========================================= */
 
-/* Small devices (phones, 600px and down) */
+/* --- Mobile (до 600px) --- */
 @media (max-width: 600px) {
-    .top-nav-bar {
-        padding: 0 0.5rem; /* Even smaller padding */
-        height: 1.8rem; /* Slightly smaller height */
-    }
-
-    .logo-text, .nav-item-top {
-        font-size: 0.7rem;
-    }
-
-    .game-nav ul {
-        gap: 0.5rem;
-    }
-
-    .content-wrapper {
-        padding: 0 0.5rem;
-        padding-top: 3.5rem; /* Adjust for smaller top nav */
-        padding-bottom: 3rem;
-    }
-
-    .header-main-section {
-        flex-direction: column; /* Stack search and user actions */
-        align-items: flex-start;
-        gap: 1rem;
-        padding: 0.5rem;
-    }
-
-    .search-bar {
-        width: 100%;
-        max-width: none; /* Remove max-width constraint */
-    }
-
-    .user-actions {
-        width: 100%;
-        justify-content: space-between; /* Distribute language and sign-in */
-        gap: 1rem;
-    }
-
-    .sign-in {
-        padding: 0.3rem 0.8rem;
-        font-size: 0.8rem;
-    }
-
-    .hero-title {
-        font-size: 1.5rem;
-        line-height: 2.2rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .stats-group {
-        flex-direction: column; /* Stack stats vertically */
-        align-items: flex-start;
-        gap: 1rem;
-    }
-
-    .stat-divider {
-        display: none; /* Hide dividers when stacked */
-    }
-
-    .download-button-hero {
-        width: 100%;
-        max-width: none;
-        margin-top: 1rem;
-    }
-
-    .games-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.8rem;
-    }
-
-    .game-cards-grid {
-        grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); /* Smaller cards on phones */
-    }
-
-    .game-card {
-        width: 90%; /* Adjust card width to fill more of the grid area */
-        height: 12rem;
-    }
-    .game-card .game-title {
-        font-size: 0.75rem;
-    }
-    .coming-soon-tag {
-        font-size: 0.4rem;
-        width: 3.5rem;
-        height: 0.9rem;
-    }
-
-    .main-footer {
-        padding: 2rem 0.5rem;
-        flex-direction: column; /* Stack footer sections */
-    }
-
-    .footer-left {
-        margin-bottom: 1.5rem;
-    }
-
-    .footer-center {
-        flex-direction: column; /* Stack footer columns */
-        gap: 1.5rem;
-        width: 100%;
-    }
-
-    .footer-column {
-        flex-basis: 100%; /* Each column takes full width */
-        min-width: auto;
-    }
-
-    /* ... (весь предыдущий CSS, включая первый медиа-запрос до .footer-bottom) ... */
-
-/* Small devices (phones, 600px and down) */
-@media (max-width: 600px) {
-    /* ... (все предыдущие стили для 600px) ... */
-
-    .footer-bottom {
-        flex-direction: column; /* Stack copyright and link */
-        margin-top: 2rem;
-    }
-
-    .copyright, .footer-link {
-        font-size: 0.65rem; /* Сделать шрифт еще меньше для маленьких экранов */
-        margin-bottom: 0.3rem; /* Уменьшить отступ между элементами */
-        padding: 0 0.5rem; /* Добавить небольшой горизонтальный отступ */
-    }
+    .top-nav-bar { padding: 0 0.5rem; height: 1.8rem; }
+    .logo-text, .nav-item-top { font-size: 0.7rem; }
+    .game-nav ul { gap: 0.5rem; }
+    .content-wrapper { padding: 0 0.5rem; padding-top: 3.5rem; padding-bottom: 3rem; }
+    .header-main-section { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 0.5rem; }
+    .search-bar { width: 100%; max-width: none; }
+    .user-actions { width: 100%; justify-content: space-between; gap: 1rem; }
+    .sign-in { padding: 0.3rem 0.8rem; font-size: 0.8rem; }
+    .hero-title { font-size: 1.5rem; line-height: 2.2rem; margin-bottom: 1.5rem; }
+    .stats-group { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .stat-divider { display: none; }
+    .download-button-hero { width: 100%; max-width: none; margin-top: 1rem; }
+    .games-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+    .game-cards-grid { grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); }
+    .game-card { width: 90%; height: 12rem; }
+    .game-card .game-title { font-size: 0.75rem; }
+    .coming-soon-tag { font-size: 0.4rem; width: 3.5rem; height: 0.9rem; }
+    .main-footer { padding: 2rem 0.5rem; flex-direction: column; }
+    .footer-left { margin-bottom: 1.5rem; }
+    .footer-center { flex-direction: column; gap: 1.5rem; width: 100%; }
+    .footer-column { flex-basis: 100%; min-width: auto; }
+    .footer-bottom { flex-direction: column; margin-top: 2rem; }
+    .copyright, .footer-link { font-size: 0.65rem; margin-bottom: 0.3rem; padding: 0 0.5rem; }
 }
 
-/* Medium devices (tablets, 768px and up, but less than 1024px) */
+/* --- Tablets (601px - 1024px) --- */
 @media (min-width: 601px) and (max-width: 1024px) {
-    :root {
-        font-size: 15px; /* Немного уменьшить базовый размер шрифта для планшетов */
-    }
-
-    .top-nav-bar {
-        padding: 0 1.5rem; /* Увеличить padding по бокам */
-        height: 2.5rem; /* Увеличить высоту */
-    }
-
-    .logo-text {
-        font-size: 0.8rem;
-    }
-
-    .game-nav ul {
-        gap: 1rem;
-    }
-
-    .nav-item-top {
-        font-size: 0.85rem;
-    }
-
-    .content-wrapper {
-        padding: 0 1.5rem; /* Соответствующий padding */
-        padding-top: 5rem; /* Учитываем высоту топ-бара и хедера */
-    }
-
-    .header-main-section {
-        flex-wrap: wrap; /* Все еще может потребоваться обернуть элементы */
-        gap: 1.5rem; /* Увеличить зазор */
-        padding: 0.8rem 0;
-    }
-
-    .search-bar {
-        max-width: 60%; /* Ограничить ширину поисковой строки, чтобы дать место другим элементам */
-    }
-
-    .user-actions {
-        gap: 1.5rem;
-    }
-
-    .sign-in {
-        font-size: 0.9rem;
-        padding: 0.4rem 1rem;
-    }
-
-    .hero-title {
-        font-size: 2.2rem;
-        line-height: 3.2rem;
-        margin-bottom: 2rem;
-    }
-
-    .stats-group {
-        gap: 2rem;
-    }
-
-    .stat-number {
-        font-size: 1.25rem;
-    }
-
-    .stat-label {
-        font-size: 0.9rem;
-    }
-
-    .download-button-hero {
-        position: absolute; /* Вернуть абсолютное позиционирование, если есть место */
-        right: 1.5rem; /* Отступ справа */
-        top: 150px; /* Приблизительно по макету */
-        width: 12rem;
-        height: 3.2rem;
-        font-size: 0.9rem;
-    }
-    /* Если download-button-hero не помещается рядом, его можно снова сделать static
-       в другом медиа-запросе для очень маленьких планшетов, или flex-grow: 1 для героя */
-    .hero-section {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        position: relative;
-    }
-
-    .games-header {
-        margin-bottom: 1.8rem;
-    }
-
-    .all-games-title {
-        font-size: 1.3rem;
-    }
-
-    .sort-by {
-        font-size: 0.85rem;
-    }
-
-    .game-cards-grid {
-        grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); /* 2-3 колонки */
-        gap: 1.5rem;
-    }
-
-    .game-card {
-        width: 100%; /* Карточки заполняют свою колонку */
-        height: 14rem;
-    }
-    .game-card .game-title {
-        font-size: 0.85rem;
-    }
-
-    .main-footer {
-        padding: 4rem 1.5rem 2rem;
-        margin-top: 4rem;
-    }
-
-    .footer-left {
-        width: 30%; /* Выделить больше места для левой колонки */
-        margin-right: 2rem;
-        margin-bottom: 0;
-    }
-
-    .footer-center {
-        gap: 3rem; /* Увеличить зазор между колонками */
-        flex-wrap: nowrap; /* Постараться не переносить колонки */
-        width: auto;
-    }
-    .footer-column {
-        flex-basis: auto; /* Allow columns to size based on content */
-        min-width: 8rem; /* Set a minimum width */
-    }
-
-    .footer-heading {
-        font-size: 0.8rem;
-    }
-
-    .footer-column ul li a {
-        font-size: 0.9rem;
-    }
-
-    .footer-bottom {
-        flex-direction: row; /* Снова выровнять в ряд */
-        justify-content: space-between;
-    }
-
-    .copyright, .footer-link {
-        width: auto; /* Снова позволить им занимать ширину по контенту */
-        margin-bottom: 0;
-        font-size: 0.75rem;
-    }
+    :root { font-size: 15px; }
+    .top-nav-bar { padding: 0 1.5rem; height: 2.5rem; }
+    .logo-text { font-size: 0.8rem; }
+    .game-nav ul { gap: 1rem; }
+    .nav-item-top { font-size: 0.85rem; }
+    .content-wrapper { padding: 0 1.5rem; padding-top: 5rem; }
+    .header-main-section { flex-wrap: wrap; gap: 1.5rem; padding: 0.8rem 0; }
+    .search-bar { max-width: 60%; }
+    .user-actions { gap: 1.5rem; }
+    .sign-in { font-size: 0.9rem; padding: 0.4rem 1rem; }
+    .hero-title { font-size: 2.2rem; line-height: 3.2rem; margin-bottom: 2rem; }
+    .stats-group { gap: 2rem; }
+    .stat-number { font-size: 1.25rem; }
+    .stat-label { font-size: 0.9rem; }
+    .download-button-hero { position: absolute; right: 1.5rem; top: 150px; width: 12rem; height: 3.2rem; font-size: 0.9rem; }
+    .hero-section { display: flex; flex-direction: column; align-items: flex-start; position: relative; }
+    .games-header { margin-bottom: 1.8rem; }
+    .all-games-title { font-size: 1.3rem; }
+    .sort-by { font-size: 0.85rem; }
+    .game-cards-grid { grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 1.5rem; }
+    .game-card { width: 100%; height: 14rem; }
+    .game-card .game-title { font-size: 0.85rem; }
+    .main-footer { padding: 4rem 1.5rem 2rem; margin-top: 4rem; }
+    .footer-left { width: 30%; margin-right: 2rem; margin-bottom: 0; }
+    .footer-center { gap: 3rem; flex-wrap: nowrap; width: auto; }
+    .footer-column { flex-basis: auto; min-width: 8rem; }
+    .footer-heading { font-size: 0.8rem; }
+    .footer-column ul li a { font-size: 0.9rem; }
+    .footer-bottom { flex-direction: row; justify-content: space-between; }
+    .copyright, .footer-link { width: auto; margin-bottom: 0; font-size: 0.75rem; }
 }
 
-/* Large devices (desktops, 1025px and up) */
+/* --- Desktops (1025px and up) --- */
 @media (min-width: 1025px) {
-    :root {
-        font-size: 16px; /* Возвращаем стандартный базовый размер */
-    }
+    :root { font-size: 16px; }
+    .top-nav-bar { padding: 0 100px; height: 32px; }
+    .logo-text { font-size: 12px; }
+    .game-nav ul { gap: 15px; }
+    .nav-item-top { font-size: 13px; }
+    .content-wrapper { padding: 0 100px; padding-top: 60px; }
+    .header-main-section { flex-wrap: nowrap; padding: 0; }
+    .search-bar { width: 827px; max-width: none; }
+    .user-actions { gap: 20px; }
+    .sign-in { font-size: 14px; padding: 6px 15px; width: 97px; height: 32px; }
+    .hero-title { font-size: 28px; line-height: 42px; margin-bottom: 30px; max-width: 888px; }
+    .stats-group { gap: 30px; flex-wrap: nowrap; }
+    .stat-divider { display: block; }
+    .download-button-hero { position: absolute; right: 0; top: 205px; width: 175px; height: 45px; font-size: 14px; margin-top: 0; }
+    .games-header { flex-wrap: nowrap; }
+    .all-games-title { font-size: 18px; }
+    .sort-by { font-size: 12px; }
+    .game-cards-grid { grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 20px; }
+    .game-card { width: 195px; height: 260px; }
+    .game-card .game-title { font-size: 14px; }
+    .coming-soon-tag { font-size: 8px; width: 71px; height: 18px; }
+    .main-footer { padding: 60px 100px 30px; margin-top: 100px; flex-direction: row; }
+    .footer-left { width: 250px; margin-right: 40px; margin-bottom: 0; }
+    .footer-center { gap: 80px; flex-wrap: nowrap; }
+    .footer-column { flex-basis: auto; min-width: auto; }
+    .footer-heading { font-size: 12px; }
+    .footer-column ul li a { font-size: 16px; }
+    .footer-bottom { flex-direction: row; margin-top: 50px; }
+    .copyright, .footer-link { font-size: 12px; width: auto; margin-bottom: 0; text-align: left; }
+}
+/* ВАЖНО: ЗДЕСЬ ЗАКРЫВАЮТСЯ МЕДИА ЗАПРОСЫ */
 
-    .top-nav-bar {
-        padding: 0 100px; /* Вернуть оригинальный padding */
-        height: 32px;
-    }
 
-    .logo-text {
-        font-size: 12px;
-    }
+/* ==========================================================================
+   9. JS ЭЛЕМЕНТЫ (ЭТО ДОЛЖНО БЫТЬ В САМОМ КОНЦЕ)
+   ========================================================================== */
 
-    .game-nav ul {
-        gap: 15px;
-    }
+/* Анимации появления карточек */
+.scroll-hidden {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
 
-    .nav-item-top {
-        font-size: 13px;
-    }
+.scroll-hidden.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transform: perspective(1000px) rotateX(0) rotateY(0);
+}
 
-    .content-wrapper {
-        padding: 0 100px;
-        padding-top: 60px;
-    }
+.download-button-hero:active,
+.download-button-footer:active {
+    transform: scale(0.95) !important;
+}
 
-    .header-main-section {
-        flex-wrap: nowrap; /* Не переносить элементы */
-        padding: 0;
-    }
+/* --- ВЫПАДАЮЩИЙ ПОИСК --- */
+.search-results {
+    position: absolute !important;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #1B1D23;
+    border: 1px solid #333;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    z-index: 9999;
+    display: none;
+    max-height: 300px;
+    overflow-y: auto;
+}
 
-    .search-bar {
-        width: 827px; /* Вернуть оригинальную ширину */
-        max-width: none;
-    }
+.search-results.active {
+    display: block !important;
+}
 
-    .user-actions {
-        gap: 20px;
-    }
+.search-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    cursor: pointer;
+    background: #1B1D23;
+}
 
-    .sign-in {
-        font-size: 14px;
-        padding: 6px 15px;
-        width: 97px;
-        height: 32px;
-    }
+.search-item:hover {
+    background: #2A2D35;
+}
 
-    .hero-title {
-        font-size: 28px;
-        line-height: 42px;
-        margin-bottom: 30px;
-        max-width: 888px;
-    }
+.search-item img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 4px;
+    object-fit: cover;
+}
 
-    .stats-group {
-        gap: 30px;
-        flex-wrap: nowrap;
-    }
+/* --- МОДАЛЬНОЕ ОКНО --- */
+.modal-overlay {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    z-index: 99999 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
 
-    .stat-divider {
-        display: block; /* Снова показать разделители */
-    }
+.modal-overlay.active {
+    opacity: 1 !important;
+    pointer-events: all !important;
+    visibility: visible !important;
+}
 
-    .download-button-hero {
-        position: absolute;
-        right: 0;
-        top: 205px;
-        width: 175px;
-        height: 45px;
-        font-size: 14px;
-        margin-top: 0; /* Сбросить margin */
-    }
+.modal-window {
+    position: relative;
+    background: #1e1e1e;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+    transform: translateY(50px);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid #444;
+    overflow: hidden;
+    max-height: 90vh;
+}
 
-    .games-header {
-        flex-wrap: nowrap;
-    }
+.modal-overlay.active .modal-window {
+    transform: translateY(0);
+}
 
-    .all-games-title {
-        font-size: 18px;
-    }
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 10;
+}
 
-    .sort-by {
-        font-size: 12px;
-    }
+.modal-body {
+    display: flex;
+    flex-direction: row;
+    height: 450px;
+}
 
-    .game-cards-grid {
-        grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); /* Вернуть оригинальный размер */
-        gap: 20px;
-    }
+.modal-image-col {
+    flex: 1;
+    background: #000;
+}
 
-    .game-card {
-        width: 195px;
-        height: 260px;
-    }
-    .game-card .game-title {
-        font-size: 14px;
-    }
-    .coming-soon-tag {
-        font-size: 8px;
-        width: 71px;
-        height: 18px;
-    }
+.modal-image-col img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-    .main-footer {
-        padding: 60px 100px 30px;
-        margin-top: 100px;
-        flex-direction: row; /* Снова выровнять в ряд */
-    }
+.modal-info-col {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-    .footer-left {
-        width: 250px;
-        margin-right: 40px;
-        margin-bottom: 0;
-    }
+.modal-description {
+    color: #aaa;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 20px 0;
+    overflow-y: auto;
+}
 
-    .footer-center {
-        gap: 80px;
-        flex-wrap: nowrap;
-    }
+.modal-play-btn {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    align-self: flex-start;
+}
 
-    .footer-column {
-        flex-basis: auto;
-        min-width: auto;
+/* Адаптив модалки */
+@media (max-width: 768px) {
+    .modal-body {
+        flex-direction: column;
+        height: auto;
     }
+    .modal-image-col {
+        height: 200px;
+    }
+    .modal-info-col {
+        padding: 20px;
+    }
+    .modal-window {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+}
+/* --- Стили для второго модального окна (Info Modal) --- */
 
-    .footer-heading {
-        font-size: 12px;
-    }
+/* Специальный класс для размера текстового окна */
+.info-window-size {
+    max-width: 600px; /* Оно будет уже, чем игровое */
+    background: #14161B; /* Чуть темнее фон */
+}
 
-    .footer-column ul li a {
-        font-size: 16px;
-    }
+.modal-body-info {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    max-height: 80vh;
+}
 
-    .footer-bottom {
-        flex-direction: row;
-        margin-top: 50px;
-    }
+.modal-body-info h2 {
+    font-family: 'Poller One', cursive;
+    color: #fff;
+    font-size: 28px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+}
 
-    .copyright, .footer-link {
-        font-size: 12px;
-        width: auto;
-        margin-bottom: 0;
-        text-align: left;
-    }
+.modal-text-content {
+    color: #ccc;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    overflow-y: auto;
+    padding-right: 10px; /* Место для скроллбара */
+}
+
+/* Красивый скроллбар для текста */
+.modal-text-content::-webkit-scrollbar {
+    width: 6px;
+}
+.modal-text-content::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+.modal-text-content::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 3px;
+}
+.modal-text-content p {
+    margin-bottom: 15px;
 }
